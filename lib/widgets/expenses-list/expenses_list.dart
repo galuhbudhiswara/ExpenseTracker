@@ -9,7 +9,7 @@ class ExpensesList extends StatelessWidget {
     required this.onRemovedExpense,
   });
 
-  final void Function (Expense expense) onRemovedExpense;
+  final void Function(Expense expense) onRemovedExpense;
   final List<Expense> expenses;
 
   @override
@@ -18,9 +18,15 @@ class ExpensesList extends StatelessWidget {
       itemCount: expenses.length,
       itemBuilder: (context, index) => Dismissible(
         key: ValueKey(expenses[index]),
+        background: Container(
+          color: Theme.of(context).colorScheme.error.withOpacity(0.75),
+          margin: EdgeInsets.symmetric(
+            horizontal: Theme.of(context).cardTheme.margin!.horizontal,
+          ),
+        ),
         onDismissed: (direction) {
           onRemovedExpense(expenses[index]);
-        } ,
+        },
         child: ExpenseItemn(
           expenses[index],
         ),
